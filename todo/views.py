@@ -27,7 +27,7 @@ def register(request):
 		else:
 			#Tell user the passwords did not match
 			return render(request, 'todone/register.html', {'form':UserCreationForm(), 'error':'Passwords did not match!'})
-			
+
 def loginuser(request):
 	if request.method == 'GET':
 		return render(request, 'todone/loginuser.html', {'form':AuthenticationForm()})
@@ -87,7 +87,7 @@ def viewtodo(request, todo_pk):
 def completetodo(request, todo_pk):
 	todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
 	if request.method == 'POST':
-		todo.datecompleted = timezone.localtime()
+		todo.datecompleted = timezone.now()
 		todo.save()
 		return redirect('currenttodos')
 
